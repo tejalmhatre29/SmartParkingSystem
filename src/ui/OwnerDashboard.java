@@ -46,6 +46,9 @@ public class OwnerDashboard extends JFrame {
         historyBtn.addActionListener(e -> {
             new ParkingHistoryFrame();
         });
+        myVehicleBtn.addActionListener(e -> {
+            new MyVehicleFrame();
+        });
 
         panel.add(title);
         panel.add(bookSlotBtn);

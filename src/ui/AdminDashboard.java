@@ -53,6 +53,10 @@ public class AdminDashboard extends JFrame {
             dispose();
         });
 
+        viewUsersBtn.addActionListener(e -> {
+    new ViewUsersFrame();
+});
+
         // Add Components
         panel.add(title);
         panel.add(manageSlotsBtn);

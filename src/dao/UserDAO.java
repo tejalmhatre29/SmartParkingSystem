@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import util.DBConnection;
 
 public class UserDAO {
@@ -84,6 +87,84 @@ public class UserDAO {
 
         if(rs.next()) {
             return rs.getString("role");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return null;
+}
+
+public List<String[]> getAllUsers() {
+
+    List<String[]> users = new ArrayList<>();
+
+    String query = """
+            SELECT name,
+                   email,
+                   vehicle_number,
+                   vehicle_type
+            FROM users
+            WHERE role='OWNER'
+            """;
+
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query)
+    ) {
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            String[] user = {
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("vehicle_number"),
+                    rs.getString("vehicle_type")
+            };
+
+            users.add(user);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return users;
+}
+
+public String[] getVehicleDetails(String email) {
+
+    String query = """
+            SELECT name,
+                   email,
+                   vehicle_number,
+                   vehicle_type
+            FROM users
+            WHERE email = ?
+            """;
+
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query)
+    ) {
+
+        pstmt.setString(1, email);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+
+            return new String[] {
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("vehicle_number"),
+                    rs.getString("vehicle_type")
+            };
         }
 
     } catch (Exception e) {

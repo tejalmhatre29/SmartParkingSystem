@@ -153,4 +153,26 @@ public String getSlotNumber(int slotId) {
 
     return "";
 }
+
+public boolean deleteSlot(int slotId) {
+
+    String query =
+            "DELETE FROM parking_slots WHERE slot_id=?";
+
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query)
+    ) {
+
+        pstmt.setInt(1, slotId);
+
+        return pstmt.executeUpdate() > 0;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
 }

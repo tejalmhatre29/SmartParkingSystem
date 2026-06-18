@@ -1,18 +1,18 @@
 package ui;
 
 import dao.ParkingSlotDAO;
-import model.ParkingSlot;
-
+import java.awt.*;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
+import model.ParkingSlot;
 
 public class ViewSlotsFrame extends JFrame {
 
     public ViewSlotsFrame() {
 
         setTitle("View Parking Slots");
-        setSize(700, 500);
+        setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -45,10 +45,74 @@ public class ViewSlotsFrame extends JFrame {
             model.addRow(row);
         }
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        JButton deleteBtn =
+                new JButton("Delete Selected Slot");
 
-        add(scrollPane);
+        deleteBtn.addActionListener(e -> {
+
+            int selectedRow =
+                    table.getSelectedRow();
+
+            if (selectedRow == -1) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Select a slot first!"
+                );
+
+                return;
+            }
+
+            int slotId =
+                    (int) model.getValueAt(
+                            selectedRow,
+                            0
+                    );
+
+            String status =
+                    model.getValueAt(
+                            selectedRow,
+                            3
+                    ).toString();
+
+            if(status.equals("OCCUPIED")) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Occupied slots cannot be deleted!"
+                );
+
+                return;
+            }
+
+            boolean deleted =
+                    dao.deleteSlot(slotId);
+
+            if(deleted) {
+
+                model.removeRow(selectedRow);
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Slot Deleted Successfully!"
+                );
+
+            } else {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Delete Failed!"
+                );
+            }
+        });
+
+        setLayout(new BorderLayout());
+
+        add(new JScrollPane(table),
+                BorderLayout.CENTER);
+
+        add(deleteBtn,
+                BorderLayout.SOUTH);
 
         setVisible(true);
     }
