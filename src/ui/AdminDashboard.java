@@ -54,8 +54,12 @@ public class AdminDashboard extends JFrame {
         });
 
         viewUsersBtn.addActionListener(e -> {
-    new ViewUsersFrame();
-});
+            new ViewUsersFrame();
+        });
+
+        vehiclesBtn.addActionListener(e -> {
+            new ViewVehiclesFrame();
+        });
 
         // Add Components
         panel.add(title);

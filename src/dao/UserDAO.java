@@ -173,4 +173,42 @@ public String[] getVehicleDetails(String email) {
 
     return null;
 }
+public List<String[]> getAllVehicles() {
+
+    List<String[]> vehicles = new ArrayList<>();
+
+    String query = """
+            SELECT name,
+                   vehicle_number,
+                   vehicle_type
+            FROM users
+            WHERE role='OWNER'
+            """;
+
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query)
+    ) {
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            String[] vehicle = {
+                    rs.getString("name"),
+                    rs.getString("vehicle_number"),
+                    rs.getString("vehicle_type")
+            };
+
+            vehicles.add(vehicle);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return vehicles;
+}
+
 }

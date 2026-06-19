@@ -2,13 +2,12 @@ package ui;
 
 import dao.BookingDAO;
 import dao.ParkingSlotDAO;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import model.Booking;
 import model.ParkingSlot;
 import util.UserSession;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
 
 public class BookSlotFrame extends JFrame {
 
@@ -52,6 +51,58 @@ bookBtn.addActionListener(e -> {
             selectedRow,
             0
     );
+
+    String vehicleType =
+        model.getValueAt(
+                selectedRow,
+                2
+        ).toString();
+
+int fee = 0;
+
+switch(vehicleType.toUpperCase()) {
+
+    case "BIKE":
+        fee = 40;
+        break;
+
+    case "CAR":
+        fee = 60;
+        break;
+
+    case "BUS":
+        fee = 80;
+        break;
+
+    case "TRUCK":
+        fee = 90;
+        break;
+}
+
+int choice =
+        JOptionPane.showConfirmDialog(
+                this,
+                "Parking Fee: ₹" + fee +
+                "\nProceed to Payment?",
+                "Payment",
+                JOptionPane.YES_NO_OPTION
+        );
+
+if(choice != JOptionPane.YES_OPTION) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Payment Cancelled!"
+    );
+
+    return;
+}
+
+JOptionPane.showMessageDialog(
+        this,
+        "Payment Successful!\n₹" + fee +
+        " received."
+);
 
     Booking booking = new Booking(
             0,
