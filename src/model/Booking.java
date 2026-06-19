@@ -7,22 +7,25 @@ public class Booking {
     private int slotId;
     private String bookingTime;
     private String status;
+    private int amount;
 
     public Booking() {
     }
 
     public Booking(
-            int bookingId,
-            String userEmail,
-            int slotId,
-            String bookingTime,
-            String status) {
+        int bookingId,
+        String userEmail,
+        int slotId,
+        String bookingTime,
+        String status,
+        int amount) {
 
         this.bookingId = bookingId;
         this.userEmail = userEmail;
         this.slotId = slotId;
         this.bookingTime = bookingTime;
         this.status = status;
+        this.amount = amount;
     }
 
     public int getBookingId() {
@@ -64,4 +67,12 @@ public class Booking {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getAmount() {
+    return amount;
+}
+
+public void setAmount(int amount) {
+    this.amount = amount;
+}
 }
