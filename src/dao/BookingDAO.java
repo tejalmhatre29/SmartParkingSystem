@@ -115,7 +115,8 @@ public class BookingDAO {
                         rs.getString("user_email"),
                         rs.getInt("slot_id"),
                         rs.getString("booking_time"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getInt("amount")
                 );
 
                 bookings.add(booking);
@@ -174,7 +175,8 @@ public class BookingDAO {
                         rs.getString("user_email"),
                         rs.getInt("slot_id"),
                         rs.getString("booking_time"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getInt("amount")
                 );
 
                 bookings.add(booking);

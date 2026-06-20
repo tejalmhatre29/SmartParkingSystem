@@ -104,13 +104,14 @@ JOptionPane.showMessageDialog(
         " received."
 );
 
-    Booking booking = new Booking(
-            0,
-            UserSession.loggedInEmail,
-            slotId,
-            null,
-            "ACTIVE"
-    );
+   Booking booking = new Booking(
+        0,
+        UserSession.loggedInEmail,
+        slotId,
+        null,
+        "ACTIVE",
+        fee
+);
 
     BookingDAO bookingDAO =
             new BookingDAO();
