@@ -6,34 +6,37 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Booking;
+import model.RevenueReport;
 import util.DBConnection;
 
 public class BookingDAO {
 
     public boolean addBooking(Booking booking) {
 
-        String query = """
-                INSERT INTO bookings
-                (user_email, slot_id, status)
-                VALUES (?, ?, ?)
-                """;
+    String query = """
+            INSERT INTO bookings
+            (user_email, slot_id, status, amount)
+            VALUES (?, ?, ?, ?)
+            """;
 
-        try (
-                Connection conn = DBConnection.getConnection(); PreparedStatement pstmt
-                = conn.prepareStatement(query)) {
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query)) {
 
-            pstmt.setString(1, booking.getUserEmail());
-            pstmt.setInt(2, booking.getSlotId());
-            pstmt.setString(3, booking.getStatus());
+        pstmt.setString(1, booking.getUserEmail());
+        pstmt.setInt(2, booking.getSlotId());
+        pstmt.setString(3, booking.getStatus());
+        pstmt.setInt(4, booking.getAmount());
 
-            return pstmt.executeUpdate() > 0;
+        return pstmt.executeUpdate() > 0;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return false;
+}
 
     public int getActiveSlotId(String email) {
 
@@ -188,4 +191,45 @@ public class BookingDAO {
 
         return bookings;
     }
+
+    public List<RevenueReport> getRevenueReports() {
+
+    List<RevenueReport> reports =
+            new ArrayList<>();
+
+    String query = """
+            SELECT DATE(booking_time) AS report_date,
+                   SUM(amount) AS revenue,
+                   COUNT(*) AS bookings
+            FROM bookings
+            WHERE status='COMPLETED'
+            GROUP BY DATE(booking_time)
+            ORDER BY DATE(booking_time) DESC
+            """;
+
+    try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery()
+    ) {
+
+        while (rs.next()) {
+
+            RevenueReport report =
+                    new RevenueReport(
+                            rs.getString("report_date"),
+                            rs.getInt("revenue"),
+                            rs.getInt("bookings")
+                    );
+
+            reports.add(report);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return reports;
+}
 }

@@ -61,6 +61,10 @@ public class AdminDashboard extends JFrame {
             new ViewVehiclesFrame();
         });
 
+        revenueBtn.addActionListener(e -> {
+            new RevenueReportFrame();
+        });
+
         // Add Components
         panel.add(title);
         panel.add(manageSlotsBtn);
