@@ -14,10 +14,10 @@ public class BookingDAO {
     public boolean addBooking(Booking booking) {
 
     String query = """
-            INSERT INTO bookings
-            (user_email, slot_id, status, amount)
-            VALUES (?, ?, ?, ?)
-            """;
+        INSERT INTO bookings
+        (user_email, slot_id, booking_time, status, amount)
+        VALUES (?, ?, datetime('now','localtime'), ?, ?)
+        """;
 
     try (
             Connection conn = DBConnection.getConnection();

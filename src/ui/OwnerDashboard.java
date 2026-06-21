@@ -50,6 +50,11 @@ public class OwnerDashboard extends JFrame {
             new MyVehicleFrame();
         });
 
+        logoutBtn.addActionListener(e -> {
+            new LoginFrame();
+            dispose();
+        });
+
         panel.add(title);
         panel.add(bookSlotBtn);
         panel.add(myVehicleBtn);
