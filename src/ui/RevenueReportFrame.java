@@ -12,11 +12,11 @@ import model.RevenueReport;
 
 public class RevenueReportFrame extends JFrame {
 
-    private final Color PURPLE =
-            new Color(155, 89, 182);
+    private final Color PURPLE
+            = new Color(155, 89, 182);
 
-    private final Color LIGHT_PURPLE =
-            new Color(240, 230, 255);
+    private final Color LIGHT_PURPLE
+            = new Color(240, 230, 255);
 
     public RevenueReportFrame() {
 
@@ -30,8 +30,8 @@ public class RevenueReportFrame extends JFrame {
         panel.setBackground(LIGHT_PURPLE);
 
         // Title
-        JLabel title =
-                new JLabel("REVENUE REPORT");
+        JLabel title
+                = new JLabel("REVENUE REPORT");
 
         title.setFont(
                 new Font(
@@ -45,8 +45,8 @@ public class RevenueReportFrame extends JFrame {
         title.setBounds(310, 25, 350, 40);
 
         // Subtitle
-        JLabel subtitle =
-                new JLabel(
+        JLabel subtitle
+                = new JLabel(
                         "Track parking revenue and completed bookings"
                 );
 
@@ -62,8 +62,8 @@ public class RevenueReportFrame extends JFrame {
         subtitle.setBounds(260, 65, 400, 20);
 
         // White Card
-        JPanel card =
-                new JPanel(new BorderLayout());
+        JPanel card
+                = new JPanel(new BorderLayout());
 
         card.setBounds(
                 30,
@@ -88,13 +88,13 @@ public class RevenueReportFrame extends JFrame {
 
         // Table Columns
         String[] columns = {
-                "Date",
-                "Revenue (₹)",
-                "Completed Bookings"
+            "Date",
+            "Revenue (₹)",
+            "Completed Bookings"
         };
 
-        DefaultTableModel model =
-                new DefaultTableModel(
+        DefaultTableModel model
+                = new DefaultTableModel(
                         columns,
                         0
                 ) {
@@ -108,8 +108,8 @@ public class RevenueReportFrame extends JFrame {
             }
         };
 
-        JTable table =
-                new JTable(model);
+        JTable table
+                = new JTable(model);
 
         // Table Styling
         table.setRowHeight(30);
@@ -139,16 +139,16 @@ public class RevenueReportFrame extends JFrame {
         );
 
         // Center Alignment
-        DefaultTableCellRenderer center =
-                new DefaultTableCellRenderer();
+        DefaultTableCellRenderer center
+                = new DefaultTableCellRenderer();
 
         center.setHorizontalAlignment(
                 SwingConstants.CENTER
         );
 
         for (int i = 0;
-             i < table.getColumnCount();
-             i++) {
+                i < table.getColumnCount();
+                i++) {
 
             table.getColumnModel()
                     .getColumn(i)
@@ -156,8 +156,8 @@ public class RevenueReportFrame extends JFrame {
         }
 
         // Header Styling
-        JTableHeader header =
-                table.getTableHeader();
+        JTableHeader header
+                = table.getTableHeader();
 
         header.setFont(
                 new Font(
@@ -171,11 +171,11 @@ public class RevenueReportFrame extends JFrame {
         header.setForeground(Color.WHITE);
 
         // Load Data
-        BookingDAO dao =
-                new BookingDAO();
+        BookingDAO dao
+                = new BookingDAO();
 
-        List<RevenueReport> reports =
-                dao.getRevenueReports();
+        List<RevenueReport> reports
+                = dao.getRevenueReports();
 
         double totalRevenue = 0;
         int totalBookings = 0;
@@ -183,23 +183,23 @@ public class RevenueReportFrame extends JFrame {
         for (RevenueReport report : reports) {
 
             Object[] row = {
-                    report.getDate(),
-                    report.getTotalRevenue(),
-                    report.getTotalBookings()
+                report.getDate(),
+                report.getTotalRevenue(),
+                report.getTotalBookings()
             };
 
             model.addRow(row);
 
-            totalRevenue +=
-                    report.getTotalRevenue();
+            totalRevenue
+                    += report.getTotalRevenue();
 
-            totalBookings +=
-                    report.getTotalBookings();
+            totalBookings
+                    += report.getTotalBookings();
         }
 
         // Summary Cards
-        JPanel summaryPanel =
-                new JPanel(
+        JPanel summaryPanel
+                = new JPanel(
                         new GridLayout(
                                 1,
                                 2,
@@ -219,10 +219,10 @@ public class RevenueReportFrame extends JFrame {
                 LIGHT_PURPLE
         );
 
-        JLabel revenueLabel =
-                new JLabel(
+        JLabel revenueLabel
+                = new JLabel(
                         "Total Revenue : ₹"
-                                + String.format(
+                        + String.format(
                                 "%.2f",
                                 totalRevenue
                         ),
@@ -253,10 +253,10 @@ public class RevenueReportFrame extends JFrame {
                 )
         );
 
-        JLabel bookingsLabel =
-                new JLabel(
+        JLabel bookingsLabel
+                = new JLabel(
                         "Completed Bookings : "
-                                + totalBookings,
+                        + totalBookings,
                         SwingConstants.CENTER
                 );
 
@@ -287,8 +287,8 @@ public class RevenueReportFrame extends JFrame {
         summaryPanel.add(revenueLabel);
         summaryPanel.add(bookingsLabel);
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        JScrollPane scrollPane
+                = new JScrollPane(table);
 
         scrollPane.setBorder(null);
 

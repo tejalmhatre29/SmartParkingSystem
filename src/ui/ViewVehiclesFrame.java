@@ -11,11 +11,11 @@ import javax.swing.table.JTableHeader;
 
 public class ViewVehiclesFrame extends JFrame {
 
-    private final Color PURPLE =
-            new Color(155, 89, 182);
+    private final Color PURPLE
+            = new Color(155, 89, 182);
 
-    private final Color LIGHT_PURPLE =
-            new Color(240, 230, 255);
+    private final Color LIGHT_PURPLE
+            = new Color(240, 230, 255);
 
     public ViewVehiclesFrame() {
 
@@ -29,8 +29,8 @@ public class ViewVehiclesFrame extends JFrame {
         panel.setBackground(LIGHT_PURPLE);
 
         // Title
-        JLabel title =
-                new JLabel("REGISTERED VEHICLES");
+        JLabel title
+                = new JLabel("REGISTERED VEHICLES");
 
         title.setFont(
                 new Font(
@@ -44,8 +44,8 @@ public class ViewVehiclesFrame extends JFrame {
         title.setBounds(250, 25, 450, 40);
 
         // Subtitle
-        JLabel subtitle =
-                new JLabel(
+        JLabel subtitle
+                = new JLabel(
                         "View all registered vehicles"
                 );
 
@@ -61,8 +61,8 @@ public class ViewVehiclesFrame extends JFrame {
         subtitle.setBounds(330, 65, 250, 20);
 
         // White Card
-        JPanel card =
-                new JPanel(new BorderLayout());
+        JPanel card
+                = new JPanel(new BorderLayout());
 
         card.setBounds(
                 40,
@@ -87,13 +87,13 @@ public class ViewVehiclesFrame extends JFrame {
 
         // Table Columns
         String[] columns = {
-                "Owner Name",
-                "Vehicle Number",
-                "Vehicle Type"
+            "Owner Name",
+            "Vehicle Number",
+            "Vehicle Type"
         };
 
-        DefaultTableModel model =
-                new DefaultTableModel(
+        DefaultTableModel model
+                = new DefaultTableModel(
                         columns,
                         0
                 ) {
@@ -107,8 +107,8 @@ public class ViewVehiclesFrame extends JFrame {
             }
         };
 
-        JTable table =
-                new JTable(model);
+        JTable table
+                = new JTable(model);
 
         // Table Styling
         table.setRowHeight(30);
@@ -138,16 +138,16 @@ public class ViewVehiclesFrame extends JFrame {
         );
 
         // Center Alignment
-        DefaultTableCellRenderer center =
-                new DefaultTableCellRenderer();
+        DefaultTableCellRenderer center
+                = new DefaultTableCellRenderer();
 
         center.setHorizontalAlignment(
                 SwingConstants.CENTER
         );
 
         for (int i = 0;
-             i < table.getColumnCount();
-             i++) {
+                i < table.getColumnCount();
+                i++) {
 
             table.getColumnModel()
                     .getColumn(i)
@@ -155,8 +155,8 @@ public class ViewVehiclesFrame extends JFrame {
         }
 
         // Header Styling
-        JTableHeader header =
-                table.getTableHeader();
+        JTableHeader header
+                = table.getTableHeader();
 
         header.setFont(
                 new Font(
@@ -170,11 +170,11 @@ public class ViewVehiclesFrame extends JFrame {
         header.setForeground(Color.WHITE);
 
         // Load Vehicle Data
-        UserDAO dao =
-                new UserDAO();
+        UserDAO dao
+                = new UserDAO();
 
-        List<String[]> vehicles =
-                dao.getAllVehicles();
+        List<String[]> vehicles
+                = dao.getAllVehicles();
 
         for (String[] vehicle : vehicles) {
 
@@ -182,10 +182,10 @@ public class ViewVehiclesFrame extends JFrame {
         }
 
         // Vehicle Count
-        JLabel countLabel =
-                new JLabel(
+        JLabel countLabel
+                = new JLabel(
                         "Total Vehicles : "
-                                + vehicles.size()
+                        + vehicles.size()
                 );
 
         countLabel.setFont(
@@ -198,8 +198,8 @@ public class ViewVehiclesFrame extends JFrame {
 
         countLabel.setForeground(PURPLE);
 
-        JPanel topPanel =
-                new JPanel(
+        JPanel topPanel
+                = new JPanel(
                         new FlowLayout(
                                 FlowLayout.RIGHT
                         )
@@ -211,8 +211,8 @@ public class ViewVehiclesFrame extends JFrame {
 
         topPanel.add(countLabel);
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        JScrollPane scrollPane
+                = new JScrollPane(table);
 
         scrollPane.setBorder(null);
 

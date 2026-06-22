@@ -49,23 +49,23 @@ public class AdminDashboard extends JFrame {
         );
 
         // Buttons
-        JButton manageSlotsBtn =
-                createButton("🅿 Manage Slots");
+        JButton manageSlotsBtn
+                = createButton("🅿 Manage Slots");
 
-        JButton viewSlotsBtn =
-                createButton("📋 View Slots");
+        JButton viewSlotsBtn
+                = createButton("📋 View Slots");
 
-        JButton viewUsersBtn =
-                createButton("👥 View Users");
+        JButton viewUsersBtn
+                = createButton("👥 View Users");
 
-        JButton vehiclesBtn =
-                createButton("🚗 View Vehicles");
+        JButton vehiclesBtn
+                = createButton("🚗 View Vehicles");
 
-        JButton revenueBtn =
-                createButton("💰 Revenue Report");
+        JButton revenueBtn
+                = createButton("💰 Revenue Report");
 
-        JButton logoutBtn =
-                createButton("🚪 Logout");
+        JButton logoutBtn
+                = createButton("🚪 Logout");
 
         manageSlotsBtn.setBounds(60, 60, 280, 90);
         viewSlotsBtn.setBounds(500, 60, 280, 90);
@@ -146,28 +146,28 @@ public class AdminDashboard extends JFrame {
         button.addMouseListener(
                 new MouseAdapter() {
 
-                    @Override
-                    public void mouseEntered(
-                            MouseEvent e) {
+            @Override
+            public void mouseEntered(
+                    MouseEvent e) {
 
-                        button.setBackground(
-                                new Color(
-                                        175,
-                                        110,
-                                        200
-                                )
-                        );
-                    }
+                button.setBackground(
+                        new Color(
+                                175,
+                                110,
+                                200
+                        )
+                );
+            }
 
-                    @Override
-                    public void mouseExited(
-                            MouseEvent e) {
+            @Override
+            public void mouseExited(
+                    MouseEvent e) {
 
-                        button.setBackground(
-                                PURPLE
-                        );
-                    }
-                });
+                button.setBackground(
+                        PURPLE
+                );
+            }
+        });
 
         return button;
     }

@@ -121,22 +121,35 @@ public class RegisterFrame extends JFrame {
 
             UserDAO userDAO = new UserDAO();
 
-boolean inserted = userDAO.insertUser(
-        name,
-        email,
-        password,
-        "OWNER",
-        vehicleNumber,
-        vehicleTypeBox.getSelectedItem().toString()
-);
+            boolean inserted = userDAO.insertUser(
+                    name,
+                    email,
+                    password,
+                    "OWNER",
+                    vehicleNumber,
+                    vehicleTypeBox.getSelectedItem().toString()
+            );
 
-if(inserted){
-    JOptionPane.showMessageDialog(this,
-            "Registration Successful!");
-}else{
-    JOptionPane.showMessageDialog(this,
-            "Registration Failed!");
-}
+            UIManager.put("OptionPane.background", Color.WHITE);
+            UIManager.put("Panel.background", Color.WHITE);
+            UIManager.put("OptionPane.messageForeground", new Color(155, 89, 182));
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "🎉 Registration Successful!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            UIManager.put("OptionPane.background", Color.WHITE);
+            UIManager.put("Panel.background", Color.WHITE);
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "❌ Registration Failed!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
 
         });
 

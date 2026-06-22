@@ -11,11 +11,11 @@ import javax.swing.table.JTableHeader;
 
 public class ViewUsersFrame extends JFrame {
 
-    private final Color PURPLE =
-            new Color(155, 89, 182);
+    private final Color PURPLE
+            = new Color(155, 89, 182);
 
-    private final Color LIGHT_PURPLE =
-            new Color(240, 230, 255);
+    private final Color LIGHT_PURPLE
+            = new Color(240, 230, 255);
 
     public ViewUsersFrame() {
 
@@ -29,8 +29,8 @@ public class ViewUsersFrame extends JFrame {
         panel.setBackground(LIGHT_PURPLE);
 
         // Title
-        JLabel title =
-                new JLabel("REGISTERED USERS");
+        JLabel title
+                = new JLabel("REGISTERED USERS");
 
         title.setFont(
                 new Font(
@@ -44,8 +44,8 @@ public class ViewUsersFrame extends JFrame {
         title.setBounds(330, 25, 400, 40);
 
         // Subtitle
-        JLabel subtitle =
-                new JLabel(
+        JLabel subtitle
+                = new JLabel(
                         "View all registered vehicle owners"
                 );
 
@@ -86,14 +86,14 @@ public class ViewUsersFrame extends JFrame {
 
         // Table Columns
         String[] columns = {
-                "Name",
-                "Email",
-                "Vehicle Number",
-                "Vehicle Type"
+            "Name",
+            "Email",
+            "Vehicle Number",
+            "Vehicle Type"
         };
 
-        DefaultTableModel model =
-                new DefaultTableModel(
+        DefaultTableModel model
+                = new DefaultTableModel(
                         columns,
                         0
                 ) {
@@ -107,8 +107,8 @@ public class ViewUsersFrame extends JFrame {
             }
         };
 
-        JTable table =
-                new JTable(model);
+        JTable table
+                = new JTable(model);
 
         // Table Styling
         table.setRowHeight(30);
@@ -138,16 +138,16 @@ public class ViewUsersFrame extends JFrame {
         );
 
         // Center Align
-        DefaultTableCellRenderer center =
-                new DefaultTableCellRenderer();
+        DefaultTableCellRenderer center
+                = new DefaultTableCellRenderer();
 
         center.setHorizontalAlignment(
                 SwingConstants.CENTER
         );
 
         for (int i = 0;
-             i < table.getColumnCount();
-             i++) {
+                i < table.getColumnCount();
+                i++) {
 
             table.getColumnModel()
                     .getColumn(i)
@@ -155,8 +155,8 @@ public class ViewUsersFrame extends JFrame {
         }
 
         // Header Styling
-        JTableHeader header =
-                table.getTableHeader();
+        JTableHeader header
+                = table.getTableHeader();
 
         header.setFont(
                 new Font(
@@ -170,11 +170,11 @@ public class ViewUsersFrame extends JFrame {
         header.setForeground(Color.WHITE);
 
         // Load Data
-        UserDAO dao =
-                new UserDAO();
+        UserDAO dao
+                = new UserDAO();
 
-        List<String[]> users =
-                dao.getAllUsers();
+        List<String[]> users
+                = dao.getAllUsers();
 
         for (String[] user : users) {
 
@@ -182,10 +182,10 @@ public class ViewUsersFrame extends JFrame {
         }
 
         // User Count
-        JLabel countLabel =
-                new JLabel(
+        JLabel countLabel
+                = new JLabel(
                         "Total Users : "
-                                + users.size()
+                        + users.size()
                 );
 
         countLabel.setFont(
@@ -198,8 +198,8 @@ public class ViewUsersFrame extends JFrame {
 
         countLabel.setForeground(PURPLE);
 
-        JPanel topPanel =
-                new JPanel(
+        JPanel topPanel
+                = new JPanel(
                         new FlowLayout(
                                 FlowLayout.RIGHT
                         )
@@ -211,8 +211,8 @@ public class ViewUsersFrame extends JFrame {
 
         topPanel.add(countLabel);
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        JScrollPane scrollPane
+                = new JScrollPane(table);
 
         scrollPane.setBorder(null);
 

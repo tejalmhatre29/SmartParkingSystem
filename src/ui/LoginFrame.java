@@ -149,8 +149,8 @@ public class LoginFrame extends JFrame {
         loginBtn.addActionListener(e -> {
 
             String email = emailField.getText().trim();
-            String password =
-                    new String(passwordField.getPassword());
+            String password
+                    = new String(passwordField.getPassword());
 
             if (email.isEmpty() || password.isEmpty()) {
 
@@ -164,19 +164,27 @@ public class LoginFrame extends JFrame {
 
             UserDAO userDAO = new UserDAO();
 
-            boolean valid =
-                    userDAO.validateLogin(email, password);
+            boolean valid
+                    = userDAO.validateLogin(email, password);
 
             if (valid) {
 
                 UserSession.loggedInEmail = email;
 
-                String role =
-                        userDAO.getUserRole(email, password);
+                String role
+                        = userDAO.getUserRole(email, password);
+
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+                UIManager.put("OptionPane.messageForeground", new Color(155, 89, 182));
+                UIManager.put("Button.background", new Color(155, 89, 182));
+                UIManager.put("Button.foreground", Color.WHITE);
 
                 JOptionPane.showMessageDialog(
                         this,
-                        "Login Successful!"
+                        "✅ Login Successful!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
 
                 if (role.equals("ADMIN")) {
@@ -192,9 +200,15 @@ public class LoginFrame extends JFrame {
 
             } else {
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+                UIManager.put("OptionPane.messageForeground", Color.RED);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Invalid Credentials!"
+                        "❌ Invalid Credentials!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         });

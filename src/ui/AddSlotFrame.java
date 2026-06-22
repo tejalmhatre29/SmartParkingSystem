@@ -73,14 +73,14 @@ public class AddSlotFrame extends JFrame {
         typeLabel.setBounds(40, 110, 120, 30);
 
         String[] types = {
-                "Car",
-                "Bike",
-                "Truck",
-                "Bus"
+            "Car",
+            "Bike",
+            "Truck",
+            "Bus"
         };
 
-        JComboBox<String> typeBox =
-                new JComboBox<>(types);
+        JComboBox<String> typeBox
+                = new JComboBox<>(types);
 
         typeBox.setBounds(180, 110, 220, 35);
         typeBox.setFont(
@@ -88,8 +88,8 @@ public class AddSlotFrame extends JFrame {
         );
 
         // Add Button
-        JButton addBtn =
-                createButton("Add Slot");
+        JButton addBtn
+                = createButton("Add Slot");
 
         addBtn.setBounds(
                 150,
@@ -100,11 +100,11 @@ public class AddSlotFrame extends JFrame {
 
         addBtn.addActionListener(e -> {
 
-            String slotNumber =
-                    slotField.getText().trim();
+            String slotNumber
+                    = slotField.getText().trim();
 
-            String vehicleType =
-                    typeBox.getSelectedItem().toString();
+            String vehicleType
+                    = typeBox.getSelectedItem().toString();
 
             if (slotNumber.isEmpty()) {
 
@@ -116,34 +116,44 @@ public class AddSlotFrame extends JFrame {
                 return;
             }
 
-            ParkingSlot slot =
-                    new ParkingSlot(
+            ParkingSlot slot
+                    = new ParkingSlot(
                             0,
                             slotNumber,
                             vehicleType,
                             "AVAILABLE"
                     );
 
-            ParkingSlotDAO dao =
-                    new ParkingSlotDAO();
+            ParkingSlotDAO dao
+                    = new ParkingSlotDAO();
 
-            boolean added =
-                    dao.addSlot(slot);
+            boolean added
+                    = dao.addSlot(slot);
 
             if (added) {
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Slot Added Successfully!"
+                        "🅿️ Slot Added Successfully!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
 
                 slotField.setText("");
 
             } else {
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Failed To Add Slot!"
+                        "❌ Failed To Add Slot!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
 
@@ -189,28 +199,28 @@ public class AddSlotFrame extends JFrame {
         button.addMouseListener(
                 new MouseAdapter() {
 
-                    @Override
-                    public void mouseEntered(
-                            MouseEvent e) {
+            @Override
+            public void mouseEntered(
+                    MouseEvent e) {
 
-                        button.setBackground(
-                                new Color(
-                                        175,
-                                        110,
-                                        200
-                                )
-                        );
-                    }
+                button.setBackground(
+                        new Color(
+                                175,
+                                110,
+                                200
+                        )
+                );
+            }
 
-                    @Override
-                    public void mouseExited(
-                            MouseEvent e) {
+            @Override
+            public void mouseExited(
+                    MouseEvent e) {
 
-                        button.setBackground(
-                                PURPLE
-                        );
-                    }
-                });
+                button.setBackground(
+                        PURPLE
+                );
+            }
+        });
 
         return button;
     }

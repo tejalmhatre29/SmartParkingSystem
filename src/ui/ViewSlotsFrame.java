@@ -12,11 +12,11 @@ import model.ParkingSlot;
 
 public class ViewSlotsFrame extends JFrame {
 
-    private final Color PURPLE =
-            new Color(155, 89, 182);
+    private final Color PURPLE
+            = new Color(155, 89, 182);
 
-    private final Color LIGHT_PURPLE =
-            new Color(240, 230, 255);
+    private final Color LIGHT_PURPLE
+            = new Color(240, 230, 255);
 
     public ViewSlotsFrame() {
 
@@ -30,8 +30,8 @@ public class ViewSlotsFrame extends JFrame {
         panel.setBackground(LIGHT_PURPLE);
 
         // Title
-        JLabel title =
-                new JLabel("PARKING SLOTS");
+        JLabel title
+                = new JLabel("PARKING SLOTS");
 
         title.setFont(
                 new Font(
@@ -45,8 +45,8 @@ public class ViewSlotsFrame extends JFrame {
         title.setBounds(330, 25, 300, 40);
 
         // Subtitle
-        JLabel subtitle =
-                new JLabel(
+        JLabel subtitle
+                = new JLabel(
                         "Manage and monitor parking slots"
                 );
 
@@ -62,8 +62,8 @@ public class ViewSlotsFrame extends JFrame {
         subtitle.setBounds(315, 65, 300, 20);
 
         // White Card
-        JPanel card =
-                new JPanel(new BorderLayout());
+        JPanel card
+                = new JPanel(new BorderLayout());
 
         card.setBounds(
                 30,
@@ -88,14 +88,14 @@ public class ViewSlotsFrame extends JFrame {
 
         // Table Columns
         String[] columns = {
-                "ID",
-                "Slot Number",
-                "Vehicle Type",
-                "Status"
+            "ID",
+            "Slot Number",
+            "Vehicle Type",
+            "Status"
         };
 
-        DefaultTableModel model =
-                new DefaultTableModel(
+        DefaultTableModel model
+                = new DefaultTableModel(
                         columns,
                         0
                 ) {
@@ -109,8 +109,8 @@ public class ViewSlotsFrame extends JFrame {
             }
         };
 
-        JTable table =
-                new JTable(model);
+        JTable table
+                = new JTable(model);
 
         table.setRowHeight(30);
 
@@ -139,16 +139,16 @@ public class ViewSlotsFrame extends JFrame {
         );
 
         // Center Align
-        DefaultTableCellRenderer center =
-                new DefaultTableCellRenderer();
+        DefaultTableCellRenderer center
+                = new DefaultTableCellRenderer();
 
         center.setHorizontalAlignment(
                 SwingConstants.CENTER
         );
 
         for (int i = 0;
-             i < table.getColumnCount();
-             i++) {
+                i < table.getColumnCount();
+                i++) {
 
             table.getColumnModel()
                     .getColumn(i)
@@ -156,8 +156,8 @@ public class ViewSlotsFrame extends JFrame {
         }
 
         // Header Styling
-        JTableHeader header =
-                table.getTableHeader();
+        JTableHeader header
+                = table.getTableHeader();
 
         header.setFont(
                 new Font(
@@ -171,29 +171,28 @@ public class ViewSlotsFrame extends JFrame {
         header.setForeground(Color.WHITE);
 
         // Load Data
-        ParkingSlotDAO dao =
-                new ParkingSlotDAO();
+        ParkingSlotDAO dao
+                = new ParkingSlotDAO();
 
-        List<ParkingSlot> slots =
-                dao.getAllSlots();
+        List<ParkingSlot> slots
+                = dao.getAllSlots();
 
         for (ParkingSlot slot : slots) {
 
             Object[] row = {
-
-                    slot.getSlotId(),
-                    slot.getSlotNumber(),
-                    slot.getVehicleType(),
-                    slot.getStatus()
+                slot.getSlotId(),
+                slot.getSlotNumber(),
+                slot.getVehicleType(),
+                slot.getStatus()
             };
 
             model.addRow(row);
         }
 
-        JLabel countLabel =
-                new JLabel(
+        JLabel countLabel
+                = new JLabel(
                         "Total Slots : "
-                                + slots.size()
+                        + slots.size()
                 );
 
         countLabel.setFont(
@@ -206,8 +205,8 @@ public class ViewSlotsFrame extends JFrame {
 
         countLabel.setForeground(PURPLE);
 
-        JPanel topPanel =
-                new JPanel(
+        JPanel topPanel
+                = new JPanel(
                         new FlowLayout(
                                 FlowLayout.RIGHT
                         )
@@ -219,8 +218,8 @@ public class ViewSlotsFrame extends JFrame {
 
         topPanel.add(countLabel);
 
-        JScrollPane scrollPane =
-                new JScrollPane(table);
+        JScrollPane scrollPane
+                = new JScrollPane(table);
 
         scrollPane.setBorder(null);
 
@@ -235,8 +234,8 @@ public class ViewSlotsFrame extends JFrame {
         );
 
         // Delete Button
-        JButton deleteBtn =
-                new JButton(
+        JButton deleteBtn
+                = new JButton(
                         "Delete Selected Slot"
                 );
 
@@ -263,33 +262,33 @@ public class ViewSlotsFrame extends JFrame {
         deleteBtn.addMouseListener(
                 new java.awt.event.MouseAdapter() {
 
-                    @Override
-                    public void mouseEntered(
-                            java.awt.event.MouseEvent e) {
+            @Override
+            public void mouseEntered(
+                    java.awt.event.MouseEvent e) {
 
-                        deleteBtn.setBackground(
-                                new Color(
-                                        175,
-                                        110,
-                                        200
-                                )
-                        );
-                    }
+                deleteBtn.setBackground(
+                        new Color(
+                                175,
+                                110,
+                                200
+                        )
+                );
+            }
 
-                    @Override
-                    public void mouseExited(
-                            java.awt.event.MouseEvent e) {
+            @Override
+            public void mouseExited(
+                    java.awt.event.MouseEvent e) {
 
-                        deleteBtn.setBackground(
-                                PURPLE
-                        );
-                    }
-                });
+                deleteBtn.setBackground(
+                        PURPLE
+                );
+            }
+        });
 
         deleteBtn.addActionListener(e -> {
 
-            int selectedRow =
-                    table.getSelectedRow();
+            int selectedRow
+                    = table.getSelectedRow();
 
             if (selectedRow == -1) {
 
@@ -301,30 +300,35 @@ public class ViewSlotsFrame extends JFrame {
                 return;
             }
 
-            int slotId =
-                    (int) model.getValueAt(
+            int slotId
+                    = (int) model.getValueAt(
                             selectedRow,
                             0
                     );
 
-            String status =
-                    model.getValueAt(
+            String status
+                    = model.getValueAt(
                             selectedRow,
                             3
                     ).toString();
 
             if (status.equals("OCCUPIED")) {
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Occupied slots cannot be deleted!"
+                        "⚠️ Occupied slots cannot be deleted!",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
                 );
 
                 return;
             }
 
-            boolean deleted =
-                    dao.deleteSlot(slotId);
+            boolean deleted
+                    = dao.deleteSlot(slotId);
 
             if (deleted) {
 
@@ -332,16 +336,26 @@ public class ViewSlotsFrame extends JFrame {
                         selectedRow
                 );
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Slot Deleted Successfully!"
+                        "🗑️ Slot Deleted Successfully!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE
                 );
 
             } else {
 
+                UIManager.put("OptionPane.background", Color.WHITE);
+                UIManager.put("Panel.background", Color.WHITE);
+
                 JOptionPane.showMessageDialog(
                         this,
-                        "Delete Failed!"
+                        "❌ Delete Failed!",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
                 );
             }
         });
